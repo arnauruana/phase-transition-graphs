@@ -12,17 +12,18 @@ using namespace std;
 using Vertex = size_t;
 using Graph = vector<forward_list<Vertex>>;
 
-//Invariant: |G.size()| = |visited|
-void DFS(const Graph& G, Vertex v, vector<bool>& visited, size_t& s, function<void(Graph&,Vertex,vector<bool>&)> callback) {
+//Invariant: |G.size()| = |visited|, v in G, s = 0 on main call.
+void DFS(const Graph& G, Vertex v, vector<bool>& visited, size_t& s, function<void(const Graph&,Vertex,vector<bool>&)> callback) {
     visited[v] = true;
     s++;
+    if (callback) callback(G,v,visited);
     for(Vertex i : G[v]) {
         if (!visited[i]) DFS(G, i, visited, s, callback);
     }
 }
 
 void DFS(const Graph& G, Vertex v, vector<bool>& visited) {
-    size_t s;
+    size_t s = 0;
     DFS(G,v,visited,s,NULL);
 }
 

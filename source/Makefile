@@ -1,15 +1,16 @@
-CC = gcc
-CXX = g++
+#CC = gcc
+#CXX = g++
+#RM = rm -f
 
 src = $(wildcard *.cc)
 obj = $(src:.cc=.o)
 
 LDFLAGS =
-CXXFLAGS = 
+CXXFLAGS = -std=c++11 -Wall
 
 graph: $(obj)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean
 clean:
-	rm -f $(obj) graph 
+	$(RM) $(obj) graph 
