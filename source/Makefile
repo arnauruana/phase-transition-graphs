@@ -2,8 +2,8 @@
 #CXX = g++
 #RM = rm -f
 
-src = $(wildcard *.cc)
-obj = $(src:.cc=.o)
+src = $(wildcard *.cpp)
+obj = $(src:.cpp=.o)
 
 LDFLAGS =
 CXXFLAGS = -std=c++11 -Wall
