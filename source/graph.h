@@ -27,4 +27,6 @@ public:
     void print() const;
 };
 
+Graph BinomialRandomGraph(size_t n, double p);
+Graph RandomGeometricGraph(size_t n, size_t r);
 #endif //GRAPHDEV_GRAPH_H

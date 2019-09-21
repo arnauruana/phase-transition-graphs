@@ -1,9 +1,8 @@
+#include <string>
+
 #define DOCTEST_CONFIG_IMPLEMENT
 #define DEBUG 0
 #include "doctest.h"
-
-
-#include <string>
 #include "graph.h"
 
 int main(int argc, char** argv) {
