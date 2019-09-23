@@ -11,6 +11,13 @@ CXXFLAGS = -std=c++11 -Wall
 graph: $(obj)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
-.PHONY: clean
+
+.PHONY: clean debug go 
+go: graph
+	./graph
+
+debug: graph
+	./graph debug
+
 clean:
-	$(RM) $(obj) graph 
+	$(RM) $(obj) graph
