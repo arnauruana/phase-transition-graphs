@@ -1,11 +1,15 @@
 #include "brg.h"
 
 
+void normalize(double& n, const size_t min, const size_t max) {
+  if (n < min)
+    n = min;
+  else if (n > max)
+    n = max;
+}
+
 Graph BinomialRandomGraph(const size_t n, double p) {
-  if (p < 0)
-    p = 0;
-  else if (p > 1)
-    p = 1;
+  normalize(p, 0, 1);
   p *= 100;
   Graph brg;
   brg.adj = vector<forward_list<size_t>> (n);
