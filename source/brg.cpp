@@ -1,4 +1,4 @@
-#include "brg.hh"
+#include "brg.h"
 
 
 Graph BinomialRandomGraph(const size_t n, double p) {
