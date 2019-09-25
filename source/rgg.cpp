@@ -5,6 +5,7 @@ struct Vertex {
 };
 
 void vertexCoordRand(vector<Vertex> v) {
+	size_t n = v.size();
 	for (size_t i = 0; i < n; i++) {
 		v[i].x = rand() % 1000;
 		v[i].y = rand() % 1000;
@@ -22,7 +23,7 @@ bool distance(vector<Vertex> v, int i, double r) {
 Graph RandomGeometricGraph(const size_t n, double r) {
   Graph rgg;
   rgg.adj = vector<forward_list<size_t>> (n);
-  vector<Vertex>(n) v;
+  vector<Vertex> v(n);
   vertexCoordRand(v);
   for (size_t i = 0; i < n; i++) {
     for (size_t j = i + 1; j < n; ++j) {
