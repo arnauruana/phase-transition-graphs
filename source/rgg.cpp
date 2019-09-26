@@ -1,4 +1,16 @@
-#include "rgg.h"
+#include "graph.h"
+#include "doctest.h"
+
+#include <cstdlib>
+#include <forward_list>
+#include <iostream>
+#include <cmath>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
+
+using namespace std;
 
 struct Vertex {
 	double x, y; //Coordinates, between 0-999 (TO-DO: Is this the correct approach?)

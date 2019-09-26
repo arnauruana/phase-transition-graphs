@@ -4,9 +4,6 @@
 #define DEBUG 0
 #include "doctest.h"
 #include "graph.h"
-#include "brg.h"
-#include "rgg.h"
-
 
 int main(int argc, char** argv) {
     doctest::Context ctx;

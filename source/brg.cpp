@@ -1,5 +1,15 @@
-#include "brg.h"
+#include "graph.h"
+#include "doctest.h"
 
+#include <cstdlib>
+#include <forward_list>
+#include <iostream>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
+
+using namespace std;
 
 void normalize(double& n, const size_t min, const size_t max) {
   if (n < min)
