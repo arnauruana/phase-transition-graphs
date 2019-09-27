@@ -16,7 +16,7 @@ double distance(Graph::Vertex a, Graph::Vertex b) {
 	return std::sqrt(x_diff * x_diff + y_diff * y_diff);
 }
 
-Graph RandomGeometricGraph(const size_t n, double r) {
+Graph RandomGeometricGraph(size_t n, double r) {
 	r = clamp(r,0,1) * RAND_MAX;
 	
 	Graph rgg;
@@ -34,4 +34,19 @@ Graph RandomGeometricGraph(const size_t n, double r) {
 		}
 	}
 	return rgg;
+}
+TEST_CASE("Testing RandomGeometricGraph Generator") {
+	CHECK(RandomGeometricGraph(10,0.0).getConnectedComponents().size() == 10);
+	CHECK(RandomGeometricGraph(320,0.0).getConnectedComponents().size() == 320);
+	CHECK(RandomGeometricGraph(10,1.0).getConnectedComponents().size() == 1);
+	CHECK(RandomGeometricGraph(320,1.0).getConnectedComponents().size() == 1);
+}
+TEST_CASE("Testing RandomGeometricGraph Generator with Seed") {
+	// The following test has been done visually using print().
+	// Here we are only checking that the results are still the same.
+	
+	srand(1234);
+	Graph g0 = RandomGeometricGraph(10,0.2);
+	CHECK(g0.adj.size() == 10);
+	CHECK(g0.getConnectedComponents().size() == 6);
 }

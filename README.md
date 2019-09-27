@@ -10,6 +10,25 @@ Transició de fase i components connexes en grafs aleatoris.
 * Random Geometric Graphs: https://en.wikipedia.org/wiki/Random_geometric_graph
 * GraphViz Online Generator: http://webgraphviz.com/
 * Un altre GraphViz Online Generator: https://dreampuf.github.io/GraphvizOnline/
+
+### Nota sobre GraphViz
+
+Es necessari fer servir el motor NEATO per generar grafs on es tingui en compte la posició dels nodes. D'altre manera els nodes es posicionen automàticament.
+
+Podeu instal·lar GraphViz al vostre PC (Linux) amb la comanda:
+
+`````shell
+apt install graphviz
+`````
+
+Per generar una imatge d'un graf podeu usar:
+
+`````shell
+./graph OPCIONS | dot -Kneato -Tpng -o graph.png
+`````
+
+
 ## Compilar i executar
 
 El projecte es pot compilar amb un compilador de C++11 i Make.
+

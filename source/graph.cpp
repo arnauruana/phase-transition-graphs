@@ -78,18 +78,27 @@ namespace std {
 	};
 }
 
-void Graph::print() const {
+void Graph::print(bool withPos) const {
+	const static size_t resolution = 10;
 	unordered_set<pair<size_t,size_t>> visited;
 
 	cout << "graph {" << endl;
+	if (withPos) {
+		for(size_t i = 0; i<size(); i++) {
+			double x = vert[i].x / RAND_MAX * resolution;
+			double y = vert[i].y / RAND_MAX * resolution;
+			cout << "\tn" << i << " [pos=\"" << x << "," << y << "!\"];" << endl;
+		}
+	}
+	
 	for(size_t i = 0; i<size(); i++) {
 		for (size_t j : adj[i]) {
 			if (visited.count(pair<size_t,size_t>(j,i)) == 0) {
-				cout << "\t" << i << " -- " << j << ";" << endl;
+				cout << "\tn" << i << " -- n" << j << ";" << endl;
 				visited.insert(make_pair(i,j));
 			}
 		}
-		if (adj[i].empty()) cout << "\t" << i << ";" << endl;
+		if (adj[i].empty()) cout << "\tn" << i << ";" << endl;
 	}
 	cout << "}" << endl;
 }

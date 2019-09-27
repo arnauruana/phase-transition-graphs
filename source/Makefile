@@ -20,4 +20,4 @@ debug: graph
 	./graph debug
 
 clean:
-	$(RM) $(obj) graph
+	$(RM) $(obj) graph *.png

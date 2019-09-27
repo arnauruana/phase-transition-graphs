@@ -28,11 +28,11 @@ public:
 	size_t size() const { return adj.size(); }
 
 	// Prints the graph in dot (GraphViz) format. Look online to render.
-	void print() const;
+	void print(bool withPos = false) const;
 };
 
 Graph BinomialRandomGraph(size_t n, double p);
-Graph RandomGeometricGraph(size_t n, size_t r);
+Graph RandomGeometricGraph(size_t n, double r);
 
 //Included in C++17, defined here for compativility with C++11 compilers.
 #if __cplusplus <= 201402L

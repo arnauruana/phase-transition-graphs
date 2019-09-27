@@ -13,14 +13,13 @@ int main(int argc, char** argv) {
 	ctx.setOption("no-breaks", true);
 	int res = 0;
 	if (DEBUG || (argc > 1 && std::string(argv[1]) == "debug")) {
-		srand(time(NULL));
 		res = ctx.run();
 		return res;
 	}
-
+	srand(time(NULL));
 	
-	Graph G({0,1,2},{{1,2},{0,2},{1,0}});
-	G.print();
+	Graph G = RandomGeometricGraph(32,0.2);
+	G.print(true);
 
 	return 0;
 }
