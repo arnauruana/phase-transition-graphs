@@ -2,33 +2,70 @@
 #include "doctest.h"
 
 #include <cstdlib>
-#include <forward_list>
 #include <iostream>
 #include <set>
 #include <string>
 #include <utility>
-#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-void normalize(double& n, const size_t min, const size_t max) {
-  if (n < min)
-    n = min;
-  else if (n > max)
-    n = max;
+//Included in C++17, defined here for compativility with C++11 compilers.
+#if __cplusplus <= 201402L
+namespace std {
+	double clamp(const double& v, const double& lo, const double& hi) {
+		return std::max(std::min(v,hi),lo);
+	}
 }
+#endif
 
 Graph BinomialRandomGraph(const size_t n, double p) {
-  normalize(p, 0, 1);
-  p *= 100;
-  Graph brg;
-  brg.adj = vector<forward_list<size_t>> (n);
-  for (size_t i = 0; i < n; ++i) {
-    for (size_t j = i + 1; j < n; ++j) {
-      double x = rand() % 100;
-      if (x < p)
-        brg.adj[i].push_front(j);
-    }
-  }
-  return brg;
+	p = clamp(p,0,1) * 100;
+	
+	Graph brg;
+	brg.vert.resize(n);
+	brg.adj.resize(n);
+	for (size_t i = 0; i < n; ++i) {
+		for (size_t j = i + 1; j < n; ++j) {
+			long long x = rand() % 100;
+			if (x < p) {
+				brg.adj[i].push_front(j);
+		brg.adj[j].push_front(i);
+		}
+		}
+	}
+	return brg;
+}
+TEST_CASE("Testing BinomialRandomGraph Generator") {
+	CHECK(BinomialRandomGraph(10,0.0).getConnectedComponents().size() == 10);
+	CHECK(BinomialRandomGraph(320,0.0).getConnectedComponents().size() == 320);
+	CHECK(BinomialRandomGraph(10,1.0).getConnectedComponents().size() == 1);
+	CHECK(BinomialRandomGraph(320,1.0).getConnectedComponents().size() == 1);
+}
+TEST_CASE("Testing BinomialRandomGraph Generator with Seed") {
+	// The following test has been done visually using print().
+	// Here we are only checking that the results are still the same.
+	
+	srand(1234);
+	Graph g0 = BinomialRandomGraph(10,0.2);
+	CHECK(g0.adj.size() == 10);
+	
+	//g0.print();
+	bool eq0 = 
+		g0.adj[0] == forward_list<size_t>{1} &&
+		g0.adj[1] == forward_list<size_t>{0} &&
+		g0.adj[2] == forward_list<size_t>{5} &&
+		g0.adj[3] == forward_list<size_t>{6} &&
+		g0.adj[4] == forward_list<size_t>{} &&
+		g0.adj[5] == forward_list<size_t>{7,2} &&
+		g0.adj[6] == forward_list<size_t>{3} &&
+		g0.adj[7] == forward_list<size_t>{5} &&
+		g0.adj[8] == forward_list<size_t>{} &&
+		g0.adj[9] == forward_list<size_t>{};
+	CHECK(eq0);
+	
+	Graph g1 = BinomialRandomGraph(10,0.3);
+	//g1.print();
+	CHECK(g1.adj.size() == 10);
+	CHECK(g1.getConnectedComponents().size() == 2);
 }
