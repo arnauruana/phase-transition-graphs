@@ -5,12 +5,13 @@
 #include <forward_list>
 #include <set>
 #include <functional>
+#include <algorithm>
 
 class Graph {
 public:
 	typedef struct {
 		size_t id;
-		double x, y;
+		double x, y; //Used on RRG only.
 	} Vertex;
 	typedef std::pair<Vertex, Vertex> Edge;
 
@@ -32,4 +33,13 @@ public:
 
 Graph BinomialRandomGraph(size_t n, double p);
 Graph RandomGeometricGraph(size_t n, size_t r);
+
+//Included in C++17, defined here for compativility with C++11 compilers.
+#if __cplusplus <= 201402L
+namespace std {
+	inline double clamp(const double& v, const double& lo, const double& hi) {
+		return std::max(std::min(v,hi),lo);
+	}
+}
+#endif
 #endif //GRAPHDEV_GRAPH_H

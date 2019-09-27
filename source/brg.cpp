@@ -1,23 +1,7 @@
 #include "graph.h"
 #include "doctest.h"
 
-#include <cstdlib>
-#include <iostream>
-#include <set>
-#include <string>
-#include <utility>
-#include <algorithm>
-
 using namespace std;
-
-//Included in C++17, defined here for compativility with C++11 compilers.
-#if __cplusplus <= 201402L
-namespace std {
-	double clamp(const double& v, const double& lo, const double& hi) {
-		return std::max(std::min(v,hi),lo);
-	}
-}
-#endif
 
 Graph BinomialRandomGraph(const size_t n, double p) {
 	p = clamp(p,0,1) * 100;
