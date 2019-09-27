@@ -12,11 +12,11 @@
 
 using namespace std;
 
-struct Vertex {
+/*struct Vertex {
 	double x, y; //Coordinates, between 0-999 (TO-DO: Is this the correct approach?)
-};
+};*/
 
-void vertexCoordRand(vector<Vertex> v) {
+void vertexCoordRand(vector<Graph::Vertex> v) {
 	size_t n = v.size();
 	for (size_t i = 0; i < n; i++) {
 		v[i].x = rand() % 1000;
@@ -24,7 +24,8 @@ void vertexCoordRand(vector<Vertex> v) {
 	}
 }
 
-bool distance(vector<Vertex> v, int i, double r) {
+//This does not work, you must compare i with j, not with i+1.
+bool distance(vector<Graph::Vertex> v, int i, double r) {
 	double x_diff = v[i].x - v[i + 1].x;
 	double y_diff = v[i].y - v[i + 1].y;
 	double dist = std::sqrt(x_diff * x_diff + y_diff * y_diff);
@@ -33,14 +34,14 @@ bool distance(vector<Vertex> v, int i, double r) {
 }
 
 Graph RandomGeometricGraph(const size_t n, double r) {
-  Graph rgg;
-  rgg.adj = vector<forward_list<size_t>> (n);
-  vector<Vertex> v(n);
-  vertexCoordRand(v);
-  for (size_t i = 0; i < n; i++) {
-    for (size_t j = i + 1; j < n; ++j) {
-      if (distance(v, i, r)) rgg.adj[i].push_front(j);
-    }
-  }
-  return rgg;
+	Graph rgg;
+	rgg.vert.resize(n);
+	rgg.adj.resize(n);
+	vertexCoordRand(rgg.vert);
+	for (size_t i = 0; i < n; i++) {
+		for (size_t j = i + 1; j < n; ++j) {
+			if (distance(rgg.vert, i, r)) rgg.adj[i].push_front(j);
+		}
+	}
+	return rgg;
 }

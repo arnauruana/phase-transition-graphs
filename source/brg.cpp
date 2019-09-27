@@ -30,8 +30,8 @@ Graph BinomialRandomGraph(const size_t n, double p) {
 			long long x = rand() % 100;
 			if (x < p) {
 				brg.adj[i].push_front(j);
-		brg.adj[j].push_front(i);
-		}
+				brg.adj[j].push_front(i);
+			}
 		}
 	}
 	return brg;

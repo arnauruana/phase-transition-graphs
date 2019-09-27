@@ -8,7 +8,10 @@
 
 class Graph {
 public:
-	typedef struct { size_t id; } Vertex;
+	typedef struct {
+		size_t id;
+		double x, y;
+	} Vertex;
 	typedef std::pair<Vertex, Vertex> Edge;
 
 	Graph() = default;
