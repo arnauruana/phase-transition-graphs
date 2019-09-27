@@ -15,9 +15,12 @@ graph: $(obj)
 .PHONY: clean debug go 
 go: graph
 	./graph
+	
+run: graph
+	./graph
 
-debug: graph
-	./graph debug
+test: graph
+	./graph test
 
 clean:
 	$(RM) $(obj) graph *.png

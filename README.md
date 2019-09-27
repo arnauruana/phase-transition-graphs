@@ -27,8 +27,34 @@ Per generar una imatge d'un graf podeu usar:
 ./graph OPCIONS | dot -Kneato -Tpng -o graph.png
 `````
 
+Per exemple:
+
+````shell
+./graph rgg 32 0.3 -p | dot -Kneato -Tpng -o graph.png
+````
+
+
 
 ## Compilar i executar
 
-El projecte es pot compilar amb un compilador de C++11 i Make.
+El projecte es pot compilar amb un compilador de C++11 i Make (Linux). A continuació un exemple amb una distribució basada en Debian.
+
+`````shell
+apt install build-essential
+cd ./source
+make
+`````
+
+A continuació us posem la ajuda d'execució.
+
+````shell
+Usage:
+        ./graph test
+        ./graph brg n p [OPTIONS]
+        ./graph rgg n r [OPTIONS]
+
+Options:
+ -p     (Default) Print the graph.
+ -c     Print the number of connected componenets.
+````
 
