@@ -26,11 +26,15 @@ test: graph
 exp: graph
 	$(RM) -r $(OUTDIR)
 	mkdir $(OUTDIR)
-	./graph brg 100 0.0:0.1:0.001 -c 32 > $(OUTDIR)/k-brg-100-00-10-00100.csv
-	./graph rgg 100 0.0:0.2:0.002 -c 32 > $(OUTDIR)/k-rgg-100-00-20-00200.csv
+	/usr/bin/time sh -c "./graph rgg 10 0:1:0.002 -c 100 > $(OUTDIR)/rgg1.csv"
+	/usr/bin/time sh -c "./graph rgg 100 0.0:0.2:0.0002 -c 100 > $(OUTDIR)/rgg2.csv"
+	/usr/bin/time sh -c "./graph rgg 1000 0.0:0.02:0.0002 -c 100 > $(OUTDIR)/rgg3.csv"
 	
-	./graph brg 100 0.0:0.1:0.0001 -c 100 > $(OUTDIR)/c-brg-100-00-10-00100.csv
-	./graph rgg 100 0.0:0.2:0.0002 -c 100 > $(OUTDIR)/c-rgg-100-00-20-00200.csv
+	/usr/bin/time sh -c "./graph brg 10 0.0:1:0.001 -c 100 > $(OUTDIR)/brg1.csv"
+	/usr/bin/time sh -c "./graph brg 100 0.0:0.1:0.0001 -c 100 > $(OUTDIR)/brg2.csv"
+	/usr/bin/time sh -c "./graph brg 1000 0.0:0.01:0.0001 -c 100 > $(OUTDIR)/brg3.csv"
+	
+
 
 clean:
 	$(RM) $(obj) graph *.png

@@ -58,11 +58,23 @@ Where n is the amount of vertex (natural number), and p and r are decimal number
 Options:
  -p         (Default) Print the graph.
  -c         Print the number of connected componenets.
+ -c k       Like C but do it k times and output a CSV space separated table.
 ````
 
 Per exemple, per generar una llista del número de components conexes dels grafs de mida 20 en el model binomail des de p=0, fins a p=0.5 amb un increment de 0.005 a cada iteració ho pode fer amb la seguent commanda:
 
 ````shell
 ./graph brg 20 0.0:0.5:0.05 -c
+````
+
+### Generar els grafics de linies
+El codi en R utilitzat ha estat el seguent (adaptat a cada cas):
+````R
+mydf <- read.table("brg1.csv", sep=" ")
+b <- sapply(mydf, function (x) as.integer(x>1))
+x <- seq(0,0.99999,0.001)
+v <- rowMeans(b[,-101])
+
+plot(x,v, type = "l",xlab="p",ylab="")
 ````
 
