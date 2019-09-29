@@ -61,10 +61,10 @@ Options:
  -c k       Like C but do it k times and output a CSV space separated table.
 ````
 
-Per exemple, per generar una llista del número de components conexes dels grafs de mida 20 en el model binomail des de p=0, fins a p=0.5 amb un increment de 0.005 a cada iteració ho pode fer amb la seguent commanda:
+Per exemple, per generar una llista del número de components conexes dels grafs de mida 20 en el model binomail des de p=0, fins a p=0.5 amb un increment de 0.005 a cada iteració es pot fer amb la seguent commanda:
 
 ````shell
-./graph brg 20 0.0:0.5:0.05 -c
+./graph brg 20 0.0:0.5:0.005 -c
 ````
 
 ### Generar els grafics de linies

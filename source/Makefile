@@ -27,8 +27,8 @@ exp: graph
 	$(RM) -r $(OUTDIR)
 	mkdir $(OUTDIR)
 	/usr/bin/time sh -c "./graph rgg 10 0:1:0.002 -c 100 > $(OUTDIR)/rgg1.csv"
-	/usr/bin/time sh -c "./graph rgg 100 0.0:0.2:0.0002 -c 100 > $(OUTDIR)/rgg2.csv"
-	/usr/bin/time sh -c "./graph rgg 1000 0.0:0.02:0.0002 -c 100 > $(OUTDIR)/rgg3.csv"
+	/usr/bin/time sh -c "./graph rgg 100 0.0:0.3:0.0003 -c 100 > $(OUTDIR)/rgg2.csv"
+	/usr/bin/time sh -c "./graph rgg 1000 0.0:0.08:0.0008 -c 100 > $(OUTDIR)/rgg3.csv"
 	
 	/usr/bin/time sh -c "./graph brg 10 0.0:1:0.001 -c 100 > $(OUTDIR)/brg1.csv"
 	/usr/bin/time sh -c "./graph brg 100 0.0:0.1:0.0001 -c 100 > $(OUTDIR)/brg2.csv"
