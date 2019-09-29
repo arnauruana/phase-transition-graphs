@@ -4,14 +4,14 @@
 using namespace std;
 
 Graph BinomialRandomGraph(const size_t n, double p) {
-	p = clamp(p,0,1) * 100;
+	p = clamp(p,0,1) * RAND_MAX;
 	
 	Graph brg;
 	brg.vert.resize(n);
 	brg.adj.resize(n);
 	for (size_t i = 0; i < n; ++i) {
 		for (size_t j = i + 1; j < n; ++j) {
-			long long x = rand() % 100;
+			long long x = rand();
 			if (x < p) {
 				brg.adj[i].push_front(j);
 				brg.adj[j].push_front(i);

@@ -19,7 +19,8 @@ void printHelp() {
 	cout << endl;
 	cout << "Options:" << endl;
 	cout << " -p         (Default) Print the graph." << endl;
-	cout << " -c         Print the number of connected componenets." << endl;  
+	cout << " -c         Print the number of connected componenets." << endl;
+	cout << " -c k       Like C but do it k times and output a CSV space separated table." << endl;
 	exit(0);
 }
 
@@ -64,22 +65,31 @@ int main(int argc, char** argv) {
 		}
 		
 		char option = 'p';
-		if (argc == 5 && argv[4][0] == '-') option = argv[4][1];
+		if (argc >= 5 && argv[4][0] == '-') option = argv[4][1];
+		unsigned int k = 1;
+		if (argc == 6 && option == 'c') {
+			std::istringstream a4(argv[5]); a4 >> k;
+		}
 		
 		for(; z<=z1; z += z2) {	
-			Graph G;
-			bool printPos = false;
-			if (std::string(argv[1]) == "brg") {
-				G = BinomialRandomGraph(n,z);
-			} else if (std::string(argv[1]) == "rgg") {
-				G = RandomGeometricGraph(n,z);
-				printPos = true;
+			for (unsigned int i = 0; i < k; i++) {
+				Graph G;
+				bool printPos = false;
+				if (std::string(argv[1]) == "brg") {
+					G = BinomialRandomGraph(n,z);
+				} else if (std::string(argv[1]) == "rgg") {
+					G = RandomGeometricGraph(n,z);
+					printPos = true;
+				}
+				switch (option) {
+					case 'c':
+						cout << G.getConnectedComponents().size() << " ";
+						break;
+					case 'p': 
+					default: G.print(printPos);
+				}
 			}
-			switch (option) {
-				case 'c': cout << G.getConnectedComponents().size() << endl; break;
-				case 'p': 
-				default: G.print(printPos);
-			}
+			cout << endl;
 		}
 	} else printHelp();
 	
