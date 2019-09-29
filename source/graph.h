@@ -11,7 +11,7 @@ class Graph {
 public:
 	typedef struct {
 		size_t id;
-		double x, y; //Used on RRG only.
+		double x, y; //Used on RGG only.
 	} Vertex;
 	typedef std::pair<Vertex, Vertex> Edge;
 

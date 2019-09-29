@@ -15,10 +15,23 @@ void printHelp() {
 	cout << "        ./graph brg n p [OPTIONS]" << endl; 
 	cout << "        ./graph rgg n r [OPTIONS]" << endl;
 	cout << endl;
+	cout << "Where n is the amount of vertex (natural number), and p and r are decimal numbers in the range 0-1, or intervals wiritten in the form low:hight:step" << endl;
+	cout << endl;
 	cout << "Options:" << endl;
-	cout << " -p     (Default) Print the graph." << endl;
-	cout << " -c     Print the number of connected componenets." << endl;
+	cout << " -p         (Default) Print the graph." << endl;
+	cout << " -c         Print the number of connected componenets." << endl;  
 	exit(0);
+}
+
+vector<std::string> split(const std::string& s, char delimiter) {
+	vector<std::string> tokens;
+	string token;
+	istringstream tokenStream(s);
+	while (getline(tokenStream, token, delimiter))
+	{
+		tokens.push_back(token);
+	}
+	return tokens;
 }
 
 int main(int argc, char** argv) {
@@ -36,21 +49,37 @@ int main(int argc, char** argv) {
 	
 	if (argc >= 4) {
 		std::istringstream a0(argv[2]); size_t n; a0 >> n;
-		std::istringstream a1(argv[3]); double z; a1 >> z;
-		bool printPos = false;
-		Graph G;
-		if (std::string(argv[1]) == "brg") {
-			G = BinomialRandomGraph(n,z);
-		} else if (std::string(argv[1]) == "rgg") {
-			G = RandomGeometricGraph(n,z);
-			printPos = true;
+		
+		auto zlist = split(string(argv[3]), ':');
+		double z, z1, z2;
+		if (zlist.size() == 1) {
+			std::istringstream a1(argv[3]); a1 >> z;
+			z1 = z;
+			z2 = 1.0;
 		}
-		if (argc == 5 && std::string(argv[4]) == "-c") {
-			cout << G.getConnectedComponents().size() << endl;
-		} else if (argc == 5 && std::string(argv[4]) == "-p") {
-			G.print(printPos);
-		} else {
-			G.print(printPos);
+		else {
+			std::istringstream a1(zlist[0]); a1 >> z;
+			std::istringstream a2(zlist[1]); a2 >> z1;
+			std::istringstream a3(zlist[2]); a3 >> z2;
+		}
+		
+		char option = 'p';
+		if (argc == 5 && argv[4][0] == '-') option = argv[4][1];
+		
+		for(; z<=z1; z += z2) {	
+			Graph G;
+			bool printPos = false;
+			if (std::string(argv[1]) == "brg") {
+				G = BinomialRandomGraph(n,z);
+			} else if (std::string(argv[1]) == "rgg") {
+				G = RandomGeometricGraph(n,z);
+				printPos = true;
+			}
+			switch (option) {
+				case 'c': cout << G.getConnectedComponents().size() << endl; break;
+				case 'p': 
+				default: G.print(printPos);
+			}
 		}
 	} else printHelp();
 	

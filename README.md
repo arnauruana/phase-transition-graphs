@@ -53,8 +53,16 @@ Usage:
         ./graph brg n p [OPTIONS]
         ./graph rgg n r [OPTIONS]
 
+Where n is the amount of vertex (natural number), and p and r are decimal numbers in the range 0-1, or intervals wiritten in the form low:hight:step
+
 Options:
- -p     (Default) Print the graph.
- -c     Print the number of connected componenets.
+ -p         (Default) Print the graph.
+ -c         Print the number of connected componenets.
+````
+
+Per exemple, per generar una llista del número de components conexes dels grafs de mida 20 en el model binomail des de p=0, fins a p=0.5 amb un increment de 0.005 a cada iteració ho pode fer amb la seguent commanda:
+
+````shell
+./graph brg 20 0.0:0.5:0.05 -c
 ````
 
