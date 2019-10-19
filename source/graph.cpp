@@ -20,7 +20,7 @@ void DFS(const Graph& G, size_t v, vector<bool>& visited, size_t& s, function<vo
 int DFS(const Graph& G, size_t v, vector<bool>& visited) {
 	size_t s = 0;
 	DFS(G,v,visited,s,NULL);
-	return s; // profunditat del DFS = mida component connexa
+	return s; // mida component connexa
 }
 
 Graph::Graph(std::set<Vertex> V, std::set<Edge> E) {

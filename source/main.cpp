@@ -12,7 +12,7 @@ using namespace std;
 void printHelp() {
 	cout << "Usage: " << endl;
 	cout << "        ./graph test" << endl;
-	cout << "        ./graph brg n p [OPTIONS]" << endl; 
+	cout << "        ./graph brg n p [OPTIONS]" << endl;
 	cout << "        ./graph rgg n r [OPTIONS]" << endl;
 	cout << endl;
 	cout << "Where n is the amount of vertex (natural number), and p and r are decimal numbers in the range 0-1, or intervals wiritten in the form low:hight:step" << endl;
@@ -21,7 +21,18 @@ void printHelp() {
 	cout << " -p         (Default) Print the graph." << endl;
 	cout << " -c         Print the number of connected componenets." << endl;
 	cout << " -c k       Like C but do it k times and output a CSV space separated table." << endl;
+	cout << " -s         Print the size of the maximum connected component + all information printed by '-c' option." << endl;
 	exit(0);
+}
+
+int maximum(const vector<int>& vec) {
+	int max = -1; // cannot be connected components with negative numbers
+	for (unsigned i = 0; i < vec.size(); ++i) {
+		int elem = vec.at(i);
+		if (elem > max)
+			max =	elem;
+	}
+	return max;
 }
 
 vector<std::string> split(const std::string& s, char delimiter) {
@@ -45,12 +56,12 @@ int main(int argc, char** argv) {
 		return res;
 	}
 	srand(time(NULL));
-	
+
 	if (argc == 1) printHelp();
-	
+
 	if (argc >= 4) {
 		std::istringstream a0(argv[2]); size_t n; a0 >> n;
-		
+
 		auto zlist = split(string(argv[3]), ':');
 		double z, z1, z2;
 		if (zlist.size() == 1) {
@@ -63,15 +74,16 @@ int main(int argc, char** argv) {
 			std::istringstream a2(zlist[1]); a2 >> z1;
 			std::istringstream a3(zlist[2]); a3 >> z2;
 		}
-		
+
 		char option = 'p';
 		if (argc >= 5 && argv[4][0] == '-') option = argv[4][1];
 		unsigned int k = 1;
 		if (argc == 6 && option == 'c') {
 			std::istringstream a4(argv[5]); a4 >> k;
 		}
-		
-		for(; z<=z1; z += z2) {	
+
+		cout << endl;
+		for(; z<=z1; z += z2) {
 			for (unsigned int i = 0; i < k; i++) {
 				Graph G;
 				bool printPos = false;
@@ -82,17 +94,23 @@ int main(int argc, char** argv) {
 					printPos = true;
 				}
 				switch (option) {
-					case 'c':
-						cout << G.getConnectedComponents().size() << " ";
+					case 's': // APARTAT D
+						cout << "Maximum size: ";
+						cout << maximum(G.getConnectedComponents());
+						cout << endl;
+					case 'c': // APARTAT C
+						cout << "Connected components: ";
+						cout << G.getConnectedComponents().size();
+						cout << endl;
 						break;
-					case 'p': 
+					case 'p':
 					default: G.print(printPos);
 				}
 			}
 			cout << endl;
 		}
 	} else printHelp();
-	
+
 
 	return 0;
 }
