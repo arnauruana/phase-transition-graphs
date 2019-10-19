@@ -18,7 +18,7 @@ double distance(Graph::Vertex a, Graph::Vertex b) {
 
 Graph RandomGeometricGraph(size_t n, double r) {
 	r = clamp(r,0,1) * RAND_MAX;
-	
+
 	Graph rgg;
 	rgg.vert.resize(n);
 	rgg.adj.resize(n);
@@ -28,6 +28,7 @@ Graph RandomGeometricGraph(size_t n, double r) {
 	for (size_t i = 0; i < n; ++i) {
 		for (size_t j = i + 1; j < n; ++j) {
 			if (distance(rgg.vert[i], rgg.vert[j]) < r) {
+				++rgg.edges;
 				rgg.adj[i].push_front(j);
 				rgg.adj[j].push_front(i);
 			}
@@ -44,7 +45,7 @@ TEST_CASE("Testing RandomGeometricGraph Generator") {
 TEST_CASE("Testing RandomGeometricGraph Generator with Seed") {
 	// The following test has been done visually using print().
 	// Here we are only checking that the results are still the same.
-	
+
 	srand(1234);
 	Graph g0 = RandomGeometricGraph(10,0.2);
 	CHECK(g0.adj.size() == 10);

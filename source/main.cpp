@@ -21,8 +21,15 @@ void printHelp() {
 	cout << " -p         (Default) Print the graph." << endl;
 	cout << " -c         Print the number of connected componenets." << endl;
 	cout << " -c k       Like C but do it k times and output a CSV space separated table." << endl;
-	cout << " -s         Print the size of the maximum connected component + all information printed by '-c' option." << endl;
+	cout << " -s         Print the size of the maximum connected component." << endl;
+	cout << " -k         Print whether the graph is complete or not." << endl;
 	exit(0);
+}
+
+bool isComplete(const Graph& gr) {
+	unsigned v = gr.vert.size();
+	unsigned e = gr.edges;
+	return e == v * (v - 1) / 2;
 }
 
 int maximum(const vector<int>& vec) {
@@ -94,10 +101,17 @@ int main(int argc, char** argv) {
 					printPos = true;
 				}
 				switch (option) {
+					case 'k': // APARTAT E
+						cout << "Is complete: ";
+						// cout << (isComplete(G) ? "Yes" : "No"); // human-readable
+						cout << isComplete(G); // machine-readable
+						cout << endl;
+						break;
 					case 's': // APARTAT D
 						cout << "Maximum size: ";
 						cout << maximum(G.getConnectedComponents());
 						cout << endl;
+						break;
 					case 'c': // APARTAT C
 						cout << "Connected components: ";
 						cout << G.getConnectedComponents().size();

@@ -24,6 +24,7 @@ int DFS(const Graph& G, size_t v, vector<bool>& visited) {
 }
 
 Graph::Graph(std::set<Vertex> V, std::set<Edge> E) {
+	this->edges = E.size();
 	adj.resize(V.size());
 	for (auto v : V) vert.push_back(v);
 	for (size_t i = 0; i < vert.size(); i++) vert[i].id = i;
@@ -36,6 +37,7 @@ Graph::Graph(std::set<Vertex> V, std::set<Edge> E) {
 }
 
 Graph::Graph(std::set<size_t> V, std::set<std::pair<size_t,size_t>> E) {
+	this->edges = E.size();
 	vert.resize(V.size());
 	adj.resize(V.size());
 	for (auto v : V) vert[v].id = v;

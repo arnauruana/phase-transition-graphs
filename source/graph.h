@@ -21,6 +21,7 @@ public:
 	//Invariant: V={0,...,n}, E = {<v_i,v_j>} such that v_i,v_j in V and v_i != v_j;
 	Graph(std::set<size_t> V, std::set<std::pair<size_t,size_t>> E);
 
+	unsigned edges = 0; // nombre d'arestes del graf
 	std::vector<Vertex> vert;
 	std::vector<std::forward_list<size_t>> adj; //Adjacency list by id.
 
