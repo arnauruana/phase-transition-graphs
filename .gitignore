@@ -6,3 +6,4 @@ build/
 results/
 source/graph
 graph
+*.png
