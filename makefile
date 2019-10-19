@@ -19,4 +19,4 @@ clean:
 	$(MAKE) -C $(SRCDIR) clean
 
 distclean: clean
-	$(RM) graph $(RESDIR)
+	$(RM) graph *.png $(RESDIR)
