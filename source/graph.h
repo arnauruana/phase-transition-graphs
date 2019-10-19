@@ -24,7 +24,7 @@ public:
 	std::vector<Vertex> vert;
 	std::vector<std::forward_list<size_t>> adj; //Adjacency list by id.
 
-	std::vector<Vertex> getConnectedComponents() const;
+	std::vector<int> getConnectedComponents() const;
 	size_t size() const { return adj.size(); }
 
 	// Prints the graph in dot (GraphViz) format. Look online to render.

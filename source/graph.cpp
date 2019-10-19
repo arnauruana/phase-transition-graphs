@@ -17,9 +17,10 @@ void DFS(const Graph& G, size_t v, vector<bool>& visited, size_t& s, function<vo
 	}
 }
 
-void DFS(const Graph& G, size_t v, vector<bool>& visited) {
+int DFS(const Graph& G, size_t v, vector<bool>& visited) {
 	size_t s = 0;
 	DFS(G,v,visited,s,NULL);
+	return s; // profunditat del DFS = mida component connexa
 }
 
 Graph::Graph(std::set<Vertex> V, std::set<Edge> E) {
@@ -47,14 +48,16 @@ Graph::Graph(std::set<size_t> V, std::set<std::pair<size_t,size_t>> E) {
 }
 
 //Returns: A vector of vertex such that each vertex belongs to a distinct connected component of an undirected graph.
-vector<Graph::Vertex> Graph::getConnectedComponents() const {
+vector<int> Graph::getConnectedComponents() const {
 	vector<bool>	  visited(size(),false);
-	vector<Vertex>	L;
+	// vector<Vertex> L;
+	vector<int>	L;
 
 	for(size_t i = 0; i < size(); i++) {
 		if (!visited[i]) {
-			DFS(*this, i, visited);
-			L.push_back(vert[i]);
+			// DFS(*this, i, visited);
+			// L.push_back(vert[i]);
+			L.push_back(DFS(*this, i, visited));
 		}
 	}
 
@@ -90,7 +93,7 @@ void Graph::print(bool withPos) const {
 			cout << "\tn" << i << " [pos=\"" << x << "," << y << "!\"];" << endl;
 		}
 	}
-	
+
 	for(size_t i = 0; i<size(); i++) {
 		for (size_t j : adj[i]) {
 			if (visited.count(pair<size_t,size_t>(j,i)) == 0) {
@@ -102,7 +105,3 @@ void Graph::print(bool withPos) const {
 	}
 	cout << "}" << endl;
 }
-
-
-
-
