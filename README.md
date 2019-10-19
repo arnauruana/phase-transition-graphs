@@ -41,9 +41,15 @@ El projecte es pot compilar amb un compilador de C++11 i Make (Linux). A continu
 
 `````shell
 apt install build-essential
-cd ./source
 make
 `````
+
+Aquí teniu un altre exemple amb una distribució basada en ArchLinux:
+
+~~~shell
+sudo pacman -S gcc make r --needed --noconfirm
+make
+~~~
 
 A continuació us posem la ajuda d'execució.
 
@@ -77,4 +83,3 @@ v <- rowMeans(b[,-101])
 
 plot(x,v, type = "l",xlab="p",ylab="")
 ````
-
