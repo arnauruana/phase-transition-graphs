@@ -24,6 +24,7 @@ public:
 	unsigned edges = 0; // nombre d'arestes del graf
 	std::vector<Vertex> vert;
 	std::vector<std::forward_list<size_t>> adj; //Adjacency list by id.
+	std::vector<std::vector<bool>> mat; // Adjacency matrix
 
 	std::vector<int> getConnectedComponents() const;
 	size_t size() const { return adj.size(); }
