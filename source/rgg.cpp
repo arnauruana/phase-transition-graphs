@@ -22,7 +22,7 @@ Graph RandomGeometricGraph(size_t n, double r) {
 	Graph rgg;
 	rgg.vert.resize(n);
 	rgg.adj.resize(n);
-	rgg.mat = vector<vector<bool>> (n, vector<bool> (n, false));
+	rgg.mat = vector<vector<int>> (n);
 	for (size_t i = 0; i < n; ++i) {
 		setVertexCoordRand(rgg.vert[i]);
 	}
@@ -32,8 +32,8 @@ Graph RandomGeometricGraph(size_t n, double r) {
 				++rgg.edges;
 				rgg.adj[i].push_front(j);
 				rgg.adj[j].push_front(i);
-				rgg.mat.at(i).at(j) = true;
-				rgg.mat.at(j).at(i) = true;
+				rgg.mat.at(i).push_back(j);
+				rgg.mat.at(j).push_back(i);
 			}
 		}
 	}

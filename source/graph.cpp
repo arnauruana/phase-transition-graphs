@@ -24,7 +24,7 @@ int DFS(const Graph& G, size_t v, vector<bool>& visited) {
 }
 
 Graph::Graph(std::set<Vertex> V, std::set<Edge> E) {
-	this->mat = vector<vector<bool>> (V.size(), vector<bool> (V.size(), false));
+	this->mat = vector<vector<int>> (V.size());
 	this->edges = E.size();
 	adj.resize(V.size());
 	for (auto v : V) vert.push_back(v);
@@ -33,14 +33,14 @@ Graph::Graph(std::set<Vertex> V, std::set<Edge> E) {
 		for (auto e : E) {
 			if (e.first.id == i) adj[i].push_front(e.second.id);
 			if (e.second.id == i) adj[i].push_front(e.first.id);
-			this->mat.at(e.first.id).at(e.second.id) = true;
-			this->mat.at(e.second.id).at(e.first.id) = true;
+			this->mat.at(e.first.id).push_back(e.second.id);
+			this->mat.at(e.second.id).push_back(e.first.id);
 		}
 	}
 }
 
 Graph::Graph(std::set<size_t> V, std::set<std::pair<size_t,size_t>> E) {
-	this->mat = vector<vector<bool>> (V.size(), vector<bool> (V.size(), false));
+	this->mat = vector<vector<int>> (V.size());
 	this->edges = E.size();
 	vert.resize(V.size());
 	adj.resize(V.size());
@@ -49,8 +49,8 @@ Graph::Graph(std::set<size_t> V, std::set<std::pair<size_t,size_t>> E) {
 		for (auto e : E) {
 			if (e.first == i) adj[i].push_front(e.second);
 			if (e.second == i) adj[i].push_front(e.first);
-			this->mat.at(e.first).at(e.second) = true;
-			this->mat.at(e.second).at(e.first) = true;
+			this->mat.at(e.first).push_back(e.second);
+			this->mat.at(e.second).push_back(e.first);
 		}
 	}
 }

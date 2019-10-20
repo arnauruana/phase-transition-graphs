@@ -9,7 +9,7 @@ Graph BinomialRandomGraph(const size_t n, double p) {
 	Graph brg;
 	brg.vert.resize(n);
 	brg.adj.resize(n);
-	brg.mat = vector<vector<bool>> (n, vector<bool> (n, false));
+	brg.mat = vector<vector<int>> (n);
 	for (size_t i = 0; i < n; ++i) {
 		for (size_t j = i + 1; j < n; ++j) {
 			long long x = rand();
@@ -17,8 +17,8 @@ Graph BinomialRandomGraph(const size_t n, double p) {
 				++brg.edges;
 				brg.adj[i].push_front(j);
 				brg.adj[j].push_front(i);
-				brg.mat.at(i).at(j) = true;
-				brg.mat.at(j).at(i) = true;
+				brg.mat.at(i).push_back(j);
+				brg.mat.at(j).push_back(i);
 			}
 		}
 	}

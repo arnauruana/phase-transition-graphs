@@ -23,6 +23,7 @@ void printHelp() {
 	cout << " -c k       Like C but do it k times and output a CSV space separated table." << endl;
 	cout << " -s         Print the size of the maximum connected component." << endl;
 	cout << " -k         Print whether the graph is complete or not." << endl;
+	cout << " -r         Print whether the graph is regular or not." << endl;
 	exit(0);
 }
 
@@ -30,6 +31,15 @@ bool isComplete(const Graph& gr) {
 	unsigned v = gr.vert.size();
 	unsigned e = gr.edges;
 	return e == v * (v - 1) / 2;
+}
+
+bool isRegular(const Graph& gr) {
+	unsigned degree = gr.mat.at(0).size();
+	for (unsigned i = 1; i < gr.mat.size(); ++i) {
+		if (gr.mat.at(i).size() != degree)
+			return false;
+	}
+	return true;
 }
 
 int maximum(const vector<int>& vec) {
@@ -101,6 +111,12 @@ int main(int argc, char** argv) {
 					printPos = true;
 				}
 				switch (option) {
+					case 'r': // APARTAT E
+						cout << "Is regular: ";
+						// cout << (isRegular(G) ? "Yes" : "No"); // human-readable
+						cout << isRegular(G); // machine-readable
+						cout << endl;
+						break;
 					case 'k': // APARTAT E
 						cout << "Is complete: ";
 						// cout << (isComplete(G) ? "Yes" : "No"); // human-readable
