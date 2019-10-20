@@ -28,7 +28,7 @@ Graph RandomGeometricGraph(size_t n, double r) {
 	}
 	for (size_t i = 0; i < n; ++i) {
 		for (size_t j = i + 1; j < n; ++j) {
-			if (distance(rgg.vert[i], rgg.vert[j]) < r) {
+			if (distance(rgg.vert[i], rgg.vert[j]) <= r) {
 				++rgg.edges;
 				rgg.adj[i].push_front(j);
 				rgg.adj[j].push_front(i);
