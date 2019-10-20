@@ -98,20 +98,10 @@ int main(int argc, char** argv) {
 		char option = 'p';
 		if (argc >= 5 && argv[4][0] == '-') option = argv[4][1];
 		unsigned int k = 1;
-		if (argc == 6 && option == 'c') {
-			std::istringstream a4(argv[5]); a4 >> k;
-		}
-		if (argc == 6 && option == 's') {
-			std::istringstream a4(argv[5]); a4 >> k;
-		}
-		if (argc == 6 && option == 'k') {
-			std::istringstream a4(argv[5]); a4 >> k;
-		}
-		if (argc == 6 && option == 'r') {
+		if ((argc == 6) && (option == 'c' || option == 'k' || option == 's' || option == 'r')) {
 			std::istringstream a4(argv[5]); a4 >> k;
 		}
 
-		cout << endl;
 		for(; z<=z1; z += z2) {
 			for (unsigned int i = 0; i < k; i++) {
 				Graph G;
@@ -124,26 +114,26 @@ int main(int argc, char** argv) {
 				}
 				switch (option) {
 					case 'r': // APARTAT E
-						cout << "Is regular: ";
+						// cout << "Is regular: ";
 						// cout << (isRegular(G) ? "Yes" : "No"); // human-readable
-						cout << isRegular(G); // machine-readable
-						cout << endl;
+						cout << isRegular(G) << ' '; // machine-readable
+						// cout << endl;
 						break;
 					case 'k': // APARTAT E
-						cout << "Is complete: ";
+						// cout << "Is complete: ";
 						// cout << (isComplete(G) ? "Yes" : "No"); // human-readable
-						cout << isComplete(G); // machine-readable
-						cout << endl;
+						cout << isComplete(G) << ' '; // machine-readable
+						// cout << endl;
 						break;
 					case 's': // APARTAT D
-						cout << "Maximum size: ";
-						cout << maximum(G.getConnectedComponents());
-						cout << endl;
+						// cout << "Maximum size: ";
+						cout << maximum(G.getConnectedComponents()) << ' ';
+						// cout << endl;
 						break;
 					case 'c': // APARTAT C
-						cout << "Connected components: ";
-						cout << G.getConnectedComponents().size();
-						cout << endl;
+						// cout << "Connected components: ";
+						cout << G.getConnectedComponents().size() << ' ';
+						// cout << endl;
 						break;
 					case 'p':
 					default: G.print(printPos);
