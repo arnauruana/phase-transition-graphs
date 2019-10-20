@@ -89,3 +89,30 @@ v <- rowMeans(b[,-101])
 
 plot(x,v, type = "l",xlab="p",ylab="")
 ````
+
+**Per a general el grafic del desplaçament de la transició de fase el codi es el seguent:**
+
+````R
+filelist <- list.files(pattern="*.csv")
+library(gtools)
+filelist <- mixedsort(filelist)
+
+thecenter <- function(filepath) {
+  mydf <- read.table(filepath, sep=" ")
+  b <- sapply(mydf, function (x) as.integer(x<=1))
+  x <- seq(0,999)
+  v <- rowMeans(b[,-1001])
+  z <- sapply(v, function (x) 0.5-abs(x-0.5))
+  z <- smooth(z, "3RSS")
+  m <- mean(which(z==max(z)))
+  #plot(z, type = "l", xlab="% of p",ylab="")
+  return(m)
+}
+
+x <- thecenter("t-brg5.csv")
+print(filelist)
+b <- sapply(filelist, function (x) thecenter(x))
+s <- seq(5,100,5)
+plot(s, b, type = "l", ylab="% of p", xlab="N")
+````
+
