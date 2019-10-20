@@ -22,8 +22,11 @@ void printHelp() {
 	cout << " -c         Print the number of connected componenets." << endl;
 	cout << " -c k       Like C but do it k times and output a CSV space separated table." << endl;
 	cout << " -s         Print the size of the maximum connected component." << endl;
+	cout << " -s k       Like S but do it k times and output a CSV space separated table." << endl;
 	cout << " -k         Print whether the graph is complete or not." << endl;
+	cout << " -k k       Like K but do it k times and output a CSV space separated table." << endl;
 	cout << " -r         Print whether the graph is regular or not." << endl;
+	cout << " -r k       Like R but do it k times and output a CSV space separated table." << endl;
 	exit(0);
 }
 
@@ -96,6 +99,15 @@ int main(int argc, char** argv) {
 		if (argc >= 5 && argv[4][0] == '-') option = argv[4][1];
 		unsigned int k = 1;
 		if (argc == 6 && option == 'c') {
+			std::istringstream a4(argv[5]); a4 >> k;
+		}
+		if (argc == 6 && option == 's') {
+			std::istringstream a4(argv[5]); a4 >> k;
+		}
+		if (argc == 6 && option == 'k') {
+			std::istringstream a4(argv[5]); a4 >> k;
+		}
+		if (argc == 6 && option == 'r') {
 			std::istringstream a4(argv[5]); a4 >> k;
 		}
 

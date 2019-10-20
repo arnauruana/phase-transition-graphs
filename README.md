@@ -66,8 +66,11 @@ Options:
  -c         Print the number of connected componenets.
  -c k       Like C but do it k times and output a CSV space separated table.
  -s         Print the size of the maximum connected component.
+ -s k       Like S but do it k times and output a CSV space separated table.
  -k         Print whether the graph is complete or not.
+ -k k       Like K but do it k times and output a CSV space separated table.
  -r         Print whether the graph is regular or not.
+ -r k       Like R but do it k times and output a CSV space separated table.
 ````
 
 Per exemple, per generar una llista del número de components conexes dels grafs de mida 20 en el model binomail des de p=0, fins a p=0.5 amb un increment de 0.005 a cada iteració es pot fer amb la seguent commanda:
