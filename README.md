@@ -116,3 +116,8 @@ s <- seq(5,100,5)
 plot(s, b, type = "l", ylab="% of p", xlab="N")
 ````
 
+## Authors
+
+- [@arnauruana](https://github.com/arnauruana)
+- [@elmeunick9](https://github.com/elmeunick9)
+- [@thesorahd](https://github.com/thesorahd)
